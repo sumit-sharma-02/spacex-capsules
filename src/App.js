@@ -6,9 +6,9 @@ function App() {
   return (
     <>
       <Navbar />
-      {/* <Routes>
+      <Routes>
         <Route index path="/" element={<Home />}></Route>
-      </Routes> */}
+      </Routes>
     </>
   );
 }

@@ -21,7 +21,7 @@ const Navbar = () => {
           <div
             onClick={openNav}
             className="text-[3rem] absolute top-[3.5rem] right-[3.5rem] cursor-pointer
-        transition-all delay-200 ease-in-out hover:text-[#ff4d30]"
+        transition-all delay-200 ease-in-out hover:text-[#da2128]"
           >
             <i className="fa-solid fa-xmark"></i>
           </div>
@@ -31,7 +31,7 @@ const Navbar = () => {
                 onClick={openNav}
                 className="no-underline text-black font-medium transition-all 
             delay-200 after:absolute after:bottom-0 after:left-0 after:h-[4px] 
-            after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#ff4d30] after:transition-transform
+            after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#da2128] after:transition-transform
             after:duration-200 after:ease-out after:content-[''] hover:after:origin-bottom-left
             hover:after:scale-x-100"
                 to="/"
@@ -44,7 +44,7 @@ const Navbar = () => {
                 onClick={openNav}
                 className="no-underline text-black font-medium transition-all 
             delay-200 after:absolute after:bottom-0 after:left-0 after:h-[4px] 
-            after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#ff4d30] after:transition-transform
+            after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#da2128] after:transition-transform
             after:duration-200 after:ease-out after:content-[''] hover:after:origin-bottom-left
             hover:after:scale-x-100"
                 to="/missions"
@@ -57,7 +57,7 @@ const Navbar = () => {
                 onClick={openNav}
                 className="no-underline text-black font-medium transition-all 
             delay-200 after:absolute after:bottom-0 after:left-0 after:h-[4px] 
-            after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#ff4d30] after:transition-transform
+            after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#da2128] after:transition-transform
             after:duration-200 after:ease-out after:content-[''] hover:after:origin-bottom-left
             hover:after:scale-x-100"
                 to="/history"
@@ -70,7 +70,7 @@ const Navbar = () => {
                 onClick={openNav}
                 className="no-underline text-black font-medium transition-all 
             delay-200 after:absolute after:bottom-0 after:left-0 after:h-[4px] 
-            after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#ff4d30] after:transition-transform
+            after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#da2128] after:transition-transform
             after:duration-200 after:ease-out after:content-[''] hover:after:origin-bottom-left
             hover:after:scale-x-100"
                 to="/about"
@@ -83,7 +83,7 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div
-          className="w-full max-w-[133rem] h-auto flex justify-between items-center px-[2.7rem] py-8
+          className="w-full max-w-[133rem] h-auto flex justify-between items-center px-[2rem] py-[2.7rem]
       absolute top-0 right-0 left-0 bg-transparent z-[99999] mx-auto my-0"
         >
           <div className="w-[14.5rem] mb-5">
@@ -96,7 +96,7 @@ const Navbar = () => {
               <Link
                 className="text-[2rem] font-Rubik font-medium no-underline cursor-pointer
               transition-all delay-100 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-[4px] 
-                  after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#ff4d30] after:transition-transform
+                  after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#da2128] after:transition-transform
                   after:duration-200 after:ease-out after:content-[''] hover:after:origin-bottom-left
                   hover:after:scale-x-100"
                 to="/"
@@ -109,7 +109,7 @@ const Navbar = () => {
               <Link
                 className="text-[2rem] font-Rubik font-medium no-underline cursor-pointer
               transition-all delay-100 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-[4px] 
-                  after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#ff4d30] after:transition-transform
+                  after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#da2128] after:transition-transform
                   after:duration-200 after:ease-out after:content-[''] hover:after:origin-bottom-left
                   hover:after:scale-x-100"
                 to="/missions"
@@ -122,7 +122,7 @@ const Navbar = () => {
               <Link
                 className="text-[2rem] font-Rubik font-medium no-underline cursor-pointer
               transition-all delay-100 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-[4px] 
-                  after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#ff4d30] after:transition-transform
+                  after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#da2128] after:transition-transform
                   after:duration-200 after:ease-out after:content-[''] hover:after:origin-bottom-left
                   hover:after:scale-x-100"
                 to="/history"
@@ -135,7 +135,7 @@ const Navbar = () => {
               <Link
                 className="text-[2rem] font-Rubik font-medium no-underline cursor-pointer
               transition-all delay-100 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-[4px] 
-              after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#ff4d30] after:transition-transform
+              after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#da2128] after:transition-transform
               after:duration-200 after:ease-out after:content-[''] hover:after:origin-bottom-left
               hover:after:scale-x-100"
                 to="/about"
@@ -148,7 +148,7 @@ const Navbar = () => {
           {/* mobile */}
           <div
             className="text-[2.8rem] flex cursor-pointer transition-all delay-100 ease-in-out 
-          hover:text-[#ff4d30] lg:hidden"
+          hover:text-[#da2128] lg:hidden"
             onClick={openNav}
           >
             <i className="fa-solid fa-bars"></i>

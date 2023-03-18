@@ -4,8 +4,14 @@ module.exports = {
   theme: {
     fontFamily: {
       Rubik: ["Rubik", "sans-serif"],
+      Poppins: ["Poppins", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      screens: {
+        xs: "450px",
+        "3xl": "1600px",
+      },
+    },
   },
   plugins: [],
 };
