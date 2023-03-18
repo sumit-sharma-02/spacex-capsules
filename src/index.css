@@ -57,3 +57,13 @@ body {
 *::-webkit-scrollbar-thumb:active {
   background-color: #ff2525;
 }
+
+::-webkit-datetime-edit {
+  padding: 1rem 1rem;
+  font-size: 1.4rem;
+}
+
+::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  font-size: 1.6rem;
+}
