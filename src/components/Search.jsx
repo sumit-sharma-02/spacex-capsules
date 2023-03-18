@@ -6,7 +6,10 @@ const Search = () => {
   const [launchDate, setLaunchDate] = useState("");
 
   return (
-    <section className="relative bg-gradient-to-b from-[#f8f8f8] to-[#ffffff]">
+    <section
+      id="search-capsule"
+      className="relative bg-gradient-to-b from-[#f8f8f8] to-[#ffffff]"
+    >
       <div className="!max-w-[133rem] !my-0 !mx-auto !px-2.5 !py-0">
         <div className="mx-auto my-0 mb-40">
           <div
@@ -39,7 +42,7 @@ const Search = () => {
               </div>
               <div className="flex flex-col">
                 <label className="text-[1.6rem] font-semibold mb-[1.2rem]">
-                  Status{" "}
+                  Capsule Status{" "}
                 </label>
                 <select
                   className="text-[1.5rem] text-[#ababab] font-Rubik border-[1px] border-solid 
@@ -47,7 +50,7 @@ const Search = () => {
                   value={capsuleStatus}
                   onChange={(event) => setCapsuleStatus(event.target.value)}
                 >
-                  <option>Select pick up location</option>
+                  <option>Select capsule status</option>
                   <option value="unknown">Unknown</option>
                   <option value="active">Active</option>
                   <option value="retired">Retired</option>

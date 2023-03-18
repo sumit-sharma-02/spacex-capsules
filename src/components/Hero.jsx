@@ -10,12 +10,6 @@ const Hero = () => {
     window.scrollTo({ top: (0, 0), behavior: "smooth" });
   };
 
-  const bookBtn = () => {
-    document
-      .querySelector("#booking-section")
-      .scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
     const onPageScroll = () => {
       if (window.pageYOffset > 600) {
@@ -62,16 +56,15 @@ const Hero = () => {
                 system.
               </p>
               <div className="flex gap-8 text-[1.6rem] font-Rubik max-sm:flex-col">
-                <Link
-                  onClick={bookBtn}
+                <a
                   className="no-underline text-white font-bold bg-[#da2128] py-[1.8rem] px-32
                     rounded-[0.3rem] shadow-[0 10px 15px 0 rgba(255, 83, 48, 0.35)] transition-all
                     delay-100 border-2 border-solid border-[#da2128] xs:px-12 hover:bg-[#b91d22]
                     hover:shadow-[0 10px 15px 0 rgba(255, 83, 48, 0.6)]"
-                  to="/"
+                  href="#search-capsule"
                 >
                   Search Now &nbsp; <i className="fa-solid fa-circle-down"></i>
-                </Link>{" "}
+                </a>{" "}
                 <Link
                   className="bg-[#010103] px-12 py-[1.8rem] rounded-[0.3rem] border-2 text-white    
                   border-solid border-[#010103] transition-all delay-100 hover:bg-transparent
