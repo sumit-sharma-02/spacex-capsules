@@ -39,7 +39,7 @@ const Hero = () => {
                 Future is here with SpaceX
               </h4>
               <h1
-                className="text-[4.2rem] sm:text-[5.2rem] font-Poppins font-bold leading-[1.2] mt-4 mb-[2.3rem]
+                className="text-[3.5rem] sm:text-[5.2rem] font-Poppins font-bold leading-[1.2] mt-4 mb-[2.3rem]
                 text-black"
               >
                 Making <span className="text-[#da2128]">Humanity</span>{" "}
@@ -57,10 +57,10 @@ const Hero = () => {
               </p>
               <div className="flex gap-8 text-[1.6rem] font-Rubik max-sm:flex-col">
                 <a
-                  className="no-underline text-white font-bold bg-[#da2128] py-[1.8rem] px-32
-                    rounded-[0.3rem] shadow-[0 10px 15px 0 rgba(255, 83, 48, 0.35)] transition-all
+                  className="no-underline text-white font-bold bg-[#da2128] py-[1.8rem] px-28
+                    rounded-[0.3rem] shadow-[0_10px_15px_0_rgba(255,83,48,0.35)] transition-all
                     delay-100 border-2 border-solid border-[#da2128] xs:px-12 hover:bg-[#b91d22]
-                    hover:shadow-[0 10px 15px 0 rgba(255, 83, 48, 0.6)]"
+                    hover:shadow-[0_10px_15px_0_rgba(255,83,48,0.6)]"
                   href="#search-capsule"
                 >
                   Search Now &nbsp; <i className="fa-solid fa-circle-down"></i>
