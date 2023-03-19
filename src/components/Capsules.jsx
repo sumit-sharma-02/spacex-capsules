@@ -3,8 +3,8 @@ import Capsule from "../images/capsule/capsule.png";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getCapsules } from "../actions/capsules";
 import { toast } from "react-toastify";
-
 import Loader from "./Loader";
+import NotFound from "./NotFound";
 
 const Capsules = () => {
   const [modal, setModal] = useState(false);
@@ -113,7 +113,7 @@ const Capsules = () => {
                 </div>
               ))}
             </div>
-            {capsules.length !== 0 && (
+            {capsules.length !== 0 ? (
               <div className="w-full pb-12 flex justify-center items-center">
                 <button
                   disabled={currentPage === 1}
@@ -159,6 +159,8 @@ const Capsules = () => {
                   <i className="fa-solid fa-angle-right"></i>
                 </button>
               </div>
+            ) : (
+              <NotFound />
             )}
           </div>
         </section>
