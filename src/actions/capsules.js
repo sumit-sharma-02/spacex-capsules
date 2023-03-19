@@ -17,7 +17,7 @@ export const getCapsules =
         type: capsuleConstants.ALL_CAPSULES_REQUEST,
       });
 
-      let capsules = await axios.get(apiPath + "/capsules");
+      const capsules = await axios.get(apiPath + "/capsules");
       const filteredCapsules = capsules.data.filter((capsule) => {
         return (
           (capsule.status === capsuleStatus || capsuleStatus === "") &&
@@ -56,6 +56,26 @@ export const getCapsules =
       });
     }
   };
+
+export const getCapsuleDetails = (capsuleSerial) => async (dispatch) => {
+  try {
+    dispatch({
+      type: capsuleConstants.CAPSULE_DETAILS_REQUEST,
+    });
+
+    const capsule = await axios.get(apiPath + `/capsules/${capsuleSerial}`);
+
+    dispatch({
+      type: capsuleConstants.CAPSULE_DETAILS_SUCCESS,
+      payload: capsule.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: capsuleConstants.CAPSULE_DETAILS_FAIL,
+      payload: error.response.data.error,
+    });
+  }
+};
 
 // Clear Errors
 export const clearErrors = () => async (dispatch) => {

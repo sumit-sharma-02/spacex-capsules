@@ -1,9 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { capsulesReducer } from "./reducers/capsules";
+import { capsuleDetailsReducer, capsulesReducer } from "./reducers/capsules";
 
 const reducers = combineReducers({
   capsules: capsulesReducer,
+  capsule: capsuleDetailsReducer,
 });
 
 const store = configureStore(

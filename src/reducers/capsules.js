@@ -35,3 +35,35 @@ export const capsulesReducer = (
       return state;
   }
 };
+
+export const capsuleDetailsReducer = (state = { capsule: {} }, action) => {
+  switch (action.type) {
+    case capsuleConstants.CAPSULE_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case capsuleConstants.CAPSULE_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        capsule: action.payload,
+      };
+
+    case capsuleConstants.CAPSULE_DETAILS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case capsuleConstants.CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
