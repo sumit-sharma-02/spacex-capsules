@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getCapsules } from "../actions/capsules";
 
 const Search = () => {
   const [capsuleType, setCapsuleType] = useState("");
   const [capsuleStatus, setCapsuleStatus] = useState("");
-  const [launchDate, setLaunchDate] = useState("");
+  const [capsuleLaunchDate, setCapsuleLaunchDate] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    dispatch(getCapsules(1, 6, capsuleStatus, capsuleType, capsuleLaunchDate));
+  };
 
   return (
     <section
@@ -23,6 +31,7 @@ const Search = () => {
             <form
               className="grid grid-cols-3 grid-rows-[auto auto] gap-8 max-md:grid-cols-1 
               max-lg:grid-cols-2"
+              onSubmit={handleSearch}
             >
               <div className="flex flex-col">
                 <label className="text-[1.6rem] font-semibold mb-[1.2rem]">
@@ -34,7 +43,7 @@ const Search = () => {
                   className="text-[1.5rem] text-[#ababab] font-Rubik border-[1px] border-solid 
                   border-[#ccd7e6] rounded-[3px] font-normal px-[1.3rem] py-[1.2rem] outline-none"
                 >
-                  <option>Select your capsule type</option>
+                  <option>Select capsule type</option>
                   <option value="Dragon 1.0">Dragon 1.0</option>
                   <option value="Dragon 1.1">Dragon 1.1</option>
                   <option value="Dragon 2.0">Dragon 2.0</option>
@@ -69,16 +78,18 @@ const Search = () => {
                 border-[#ccd7e6] rounded-[3px]"
                   id="launch__date"
                   type="date"
-                  value={launchDate}
-                  onChange={(event) => setLaunchDate(event.target.value)}
+                  value={capsuleLaunchDate}
+                  onChange={(event) => {
+                    setCapsuleLaunchDate(event.target.value);
+                  }}
                 />
               </div>
               <button
+                type="submit"
                 className="px-[1.3rem] py-[1.3rem] h-fit self-end border-none font-Rubik
               text-[1.8rem] font-medium text-white bg-[#da2128] shadow-[0_10px_15px_rgba(255,83,48,0.35)] 
               cursor-pointer transition-all delay-100 ease-in-out hover:shadow-[0_10px_15px_rgba(255,83,48,0.55)] 
               rounded-md"
-                type="submit"
               >
                 Search
               </button>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Capsule from "../images/capsule/capsule.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getCapsules } from "../actions/capsules";
+import { clearErrors, getCapsules } from "../actions/capsules";
+import { toast } from "react-toastify";
+
 import Loader from "./Loader";
 
 const Capsules = () => {
@@ -16,19 +18,34 @@ const Capsules = () => {
 
   useEffect(() => {
     if (error) {
-      console.error("All capsule data error while fetching", error);
-      return;
+      showErrorToast(error);
+      dispatch(clearErrors());
     }
     dispatch(getCapsules(currentPage, capsulesPerPage));
   }, [dispatch, error, currentPage, capsulesPerPage]);
 
-  const formatDate = () => {
-    const date = { year: "numeric", month: "long", day: "numeric" };
-    return new Date("2010-12-08T15:43:00.000Z").toLocaleDateString(
-      undefined,
-      date
-    );
+  const formatDate = (date) => {
+    const dateFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return new Date(date).toLocaleDateString(undefined, dateFormatOptions);
   };
+
+  const showErrorToast = (message) => {
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
   return (
     <>
       {loading ? (
@@ -96,49 +113,53 @@ const Capsules = () => {
                 </div>
               ))}
             </div>
-            <div className="w-full pb-12 flex justify-center items-center">
-              <button
-                onClick={() => {
-                  if (currentPage > 1) {
-                    setCurrentPage(currentPage - 1);
-                  }
-                }}
-                className="text-black py-1 px-6 rounded-tl rounded-bl border border-gray-300 
-                hover:bg-[#da2128] hover:text-white transition-all delay-100 ease-in-out 
-                text-[2rem]"
-              >
-                <i className="fa-solid fa-angle-left"></i>
-              </button>
-              {pages.map((pageNo) => (
-                <span
-                  key={pageNo}
-                  style={{
-                    backgroundColor: `${
-                      pageNo === currentPage ? "#da2128" : ""
-                    }`,
-                    color: `${pageNo === currentPage ? "white" : ""}`,
+            {capsules.length !== 0 && (
+              <div className="w-full pb-12 flex justify-center items-center">
+                <button
+                  disabled={currentPage === 1}
+                  onClick={() => {
+                    if (currentPage > 1) {
+                      setCurrentPage(currentPage - 1);
+                    }
                   }}
-                  className="pb-[0.3rem] px-6 border border-gray-300 text-[1.8rem] transition-all 
+                  className="text-black py-1 px-6 rounded-tl rounded-bl border border-gray-300 
+                hover:bg-[#da2128] hover:text-white transition-all delay-100 ease-in-out 
+                text-[2rem] disabled:opacity-50"
+                >
+                  <i className="fa-solid fa-angle-left"></i>
+                </button>
+                {pages.map((pageNo) => (
+                  <span
+                    key={pageNo}
+                    style={{
+                      backgroundColor: `${
+                        pageNo === currentPage ? "#da2128" : ""
+                      }`,
+                      color: `${pageNo === currentPage ? "white" : ""}`,
+                    }}
+                    className="pb-[0.3rem] px-6 border border-gray-300 text-[1.8rem] transition-all 
                   delay-200 ease-in-out cursor-pointer hover:bg-[#da2128] hover:text-white pt-2 
                   text-black"
-                  onClick={() => setCurrentPage(pageNo)}
-                >
-                  {pageNo}
-                </span>
-              ))}
-              <button
-                onClick={() => {
-                  if (currentPage < totalPages) {
-                    setCurrentPage(currentPage + 1);
-                  }
-                }}
-                className="text-black py-1 px-6 rounded-tr rounded-br border border-gray-300 
+                    onClick={() => setCurrentPage(pageNo)}
+                  >
+                    {pageNo}
+                  </span>
+                ))}
+                <button
+                  disabled={currentPage === pages.length}
+                  onClick={() => {
+                    if (currentPage < totalPages) {
+                      setCurrentPage(currentPage + 1);
+                    }
+                  }}
+                  className="text-black py-1 px-6 rounded-tr rounded-br border border-gray-300 
                 hover:bg-[#da2128] hover:text-white transition-all delay-100 ease-in-out 
-                text-[2rem]"
-              >
-                <i className="fa-solid fa-angle-right"></i>
-              </button>
-            </div>
+                text-[2rem] disabled:opacity-50"
+                >
+                  <i className="fa-solid fa-angle-right"></i>
+                </button>
+              </div>
+            )}
           </div>
         </section>
       )}
