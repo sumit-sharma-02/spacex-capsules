@@ -1,6 +1,9 @@
 import { capsuleConstants } from "../constants/capsules";
 
-export const capsulesReducer = (state = { capsules: [] }, action) => {
+export const capsulesReducer = (
+  state = { capsules: [], pages: [], totalPages: 1 },
+  action
+) => {
   switch (action.type) {
     case capsuleConstants.ALL_CAPSULES_REQUEST:
       return {
@@ -11,7 +14,9 @@ export const capsulesReducer = (state = { capsules: [] }, action) => {
     case capsuleConstants.ALL_CAPSULES_SUCCESS:
       return {
         loading: false,
-        capsules: action.payload.data,
+        capsules: action.payload.paginatedCapsules,
+        pages: action.payload.pages,
+        totalPages: action.payload.totalCapsulesPages,
       };
 
     case capsuleConstants.ALL_CAPSULES_FAIL:

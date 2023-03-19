@@ -6,23 +6,27 @@ import Loader from "./Loader";
 
 const Capsules = () => {
   const [modal, setModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { loading, capsules, pages, totalPages, error } = useSelector(
+    (state) => state.capsules
+  );
+  const capsulesPerPage = 6;
 
   const dispatch = useDispatch();
-  const { loading, capsules, error } = useSelector((state) => state.capsules);
 
   useEffect(() => {
     if (error) {
       console.error("All capsule data error while fetching", error);
       return;
     }
-    dispatch(getCapsules());
-  }, [dispatch, error]);
+    dispatch(getCapsules(currentPage, capsulesPerPage));
+  }, [dispatch, error, currentPage, capsulesPerPage]);
 
   const formatDate = () => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
+    const date = { year: "numeric", month: "long", day: "numeric" };
     return new Date("2010-12-08T15:43:00.000Z").toLocaleDateString(
       undefined,
-      options
+      date
     );
   };
   return (
@@ -39,7 +43,7 @@ const Capsules = () => {
           ></div>
           <div className="!max-w-[133rem] !my-0 !mx-auto !px-10 !py-0">
             <div
-              className="grid grid-cols-3 grid-rows-[auto] gap-12 items-center text-center px-0 py-40
+              className="grid grid-cols-3 grid-rows-[auto] gap-12 items-center text-center px-0 py-12
               w-[110rem] mx-auto my-0 max-md:w-fit max-md:grid-cols-1 max-xlg:grid-cols-2 max-xlg:w-fit"
             >
               {capsules.map((capsule) => (
@@ -91,6 +95,49 @@ const Capsules = () => {
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="w-full pb-12 flex justify-center items-center">
+              <button
+                onClick={() => {
+                  if (currentPage > 1) {
+                    setCurrentPage(currentPage - 1);
+                  }
+                }}
+                className="text-black py-1 px-6 rounded-tl rounded-bl border border-gray-300 
+                hover:bg-[#da2128] hover:text-white transition-all delay-100 ease-in-out 
+                text-[2rem]"
+              >
+                <i className="fa-solid fa-angle-left"></i>
+              </button>
+              {pages.map((pageNo) => (
+                <span
+                  key={pageNo}
+                  style={{
+                    backgroundColor: `${
+                      pageNo === currentPage ? "#da2128" : ""
+                    }`,
+                    color: `${pageNo === currentPage ? "white" : ""}`,
+                  }}
+                  className="pb-[0.3rem] px-6 border border-gray-300 text-[1.8rem] transition-all 
+                  delay-200 ease-in-out cursor-pointer hover:bg-[#da2128] hover:text-white pt-2 
+                  text-black"
+                  onClick={() => setCurrentPage(pageNo)}
+                >
+                  {pageNo}
+                </span>
+              ))}
+              <button
+                onClick={() => {
+                  if (currentPage < totalPages) {
+                    setCurrentPage(currentPage + 1);
+                  }
+                }}
+                className="text-black py-1 px-6 rounded-tr rounded-br border border-gray-300 
+                hover:bg-[#da2128] hover:text-white transition-all delay-100 ease-in-out 
+                text-[2rem]"
+              >
+                <i className="fa-solid fa-angle-right"></i>
+              </button>
             </div>
           </div>
         </section>
