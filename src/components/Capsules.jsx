@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Capsule from "../images/capsule/capsule.png";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, getCapsules } from "../actions/capsules";
+import {
+  clearErrors,
+  getCapsules,
+  getCapsuleDetails,
+} from "../actions/capsules";
 import { toast } from "react-toastify";
 import Loader from "./Loader";
 import NotFound from "./NotFound";
@@ -12,8 +16,13 @@ const Capsules = () => {
   const { loading, capsules, pages, totalPages, error } = useSelector(
     (state) => state.capsules
   );
-  const capsulesPerPage = 6;
+  const {
+    capsuleDetailsLoading = loading,
+    capsule,
+    capsuleDetailsError = error,
+  } = useSelector((state) => state.capsule);
 
+  const capsulesPerPage = 6;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,6 +32,15 @@ const Capsules = () => {
     }
     dispatch(getCapsules(currentPage, capsulesPerPage));
   }, [dispatch, error, currentPage, capsulesPerPage]);
+
+  const showCapsuleDetails = (capsuleSerialID) => {
+    if (error) {
+      showErrorToast(capsuleDetailsError);
+      dispatch(clearErrors());
+    }
+    dispatch(getCapsuleDetails(capsuleSerialID));
+    setModal(true);
+  };
 
   const formatDate = (date) => {
     const dateFormatOptions = {
@@ -44,6 +62,25 @@ const Capsules = () => {
       progress: undefined,
       theme: "colored",
     });
+  };
+
+  const showProperCapsuleStatusColor = (status) => {
+    switch (status) {
+      case "active":
+        return "text-green-400";
+
+      case "retired":
+        return "text-gray-400";
+
+      case "unknown":
+        return "text-orange-400";
+
+      case "destroyed":
+        return "text-red-400";
+
+      default:
+        return "";
+    }
   };
 
   return (
@@ -83,7 +120,11 @@ const Capsules = () => {
                           </p>
                         </div>
                         <div className="flex flex-col text-right">
-                          <p className="font-bold text-[2rem] text-orange-400">
+                          <p
+                            className={`font-bold text-[2rem] ${showProperCapsuleStatusColor(
+                              capsule.status
+                            )}`}
+                          >
                             {capsule.status.charAt(0).toUpperCase() +
                               capsule.status.slice(1)}
                           </p>
@@ -104,7 +145,9 @@ const Capsules = () => {
                         className="bg-[#da2128] px-[3rem] text-white py-[1.25rem] rounded-[0.3rem] 
                         shadow-[0_10px_15px_rgba(255,83,48,0.35)] hover:shadow-[0_10px_15px_rgba(255,83,48,0.55)]
                         transition-all delay-100 text-[1.8rem] cursor-pointer"
-                        onClick={() => setModal(true)}
+                        onClick={() =>
+                          showCapsuleDetails(capsule.capsule_serial)
+                        }
                       >
                         View Details
                       </div>
@@ -187,61 +230,118 @@ const Capsules = () => {
           ></i>
         </div>
         {/* Capsule info */}
-        <div
-          className="bg-white p-[3rem] grid grid-cols-2 border-b-[1px] border-solid
-        border-[rgba(119,119,119,0.6235294118) max-sm:grid-cols-1 max-sm:text-center"
-        >
-          <div>
-            <div className="flex flex-col gap-8">
-              <h5 className="font-bold text-[1.8rem] text-[#da2128]">Dragon</h5>
-              <span className="flex gap-4 max-sm:grid-cols-1 max-sm:text-center max-sm:justify-center">
-                <div>
-                  <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
-                    Detail 1
-                  </h6>
-                </div>
-              </span>
-            </div>
+        {capsuleDetailsLoading ? (
+          <Loader />
+        ) : (
+          <div
+            className="bg-white p-[3rem] grid grid-cols-2 border-b-[1px] border-solid
+            border-[rgba(119,119,119,0.6235294118) max-sm:grid-cols-1 max-sm:text-center"
+          >
+            <div>
+              <div className="flex flex-col gap-4">
+                <h5 className="font-bold text-[1.8rem] text-[#da2128]">
+                  {capsule.type && capsule.type}
+                </h5>
+                <span className="flex gap-4 max-sm:grid-cols-1 max-sm:text-center max-sm:justify-center">
+                  <div className="w-[calc(100%_-_50px)] flex justify-between items-center">
+                    <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
+                      Capsule Status
+                    </h6>
+                    <p
+                      className={`font-light text-[1.4rem] ${showProperCapsuleStatusColor(
+                        capsule.status && capsule.status
+                      )}`}
+                    >
+                      {capsule.status &&
+                        capsule.status.charAt(0).toUpperCase() +
+                          capsule.status.slice(1)}
+                    </p>
+                  </div>
+                </span>
+              </div>
 
-            <div className="flex flex-col gap-8">
-              <span className="text-[1.8rem]">
-                <div className="flex gap-4 max-sm:grid-cols-1 max-sm:text-center max-sm:justify-center">
-                  <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
-                    Detail 2
-                  </h6>
-                </div>
-              </span>
-            </div>
+              <div className="flex flex-col gap-8">
+                <span className="text-[1.8rem]">
+                  <div className="w-[calc(100%_-_50px)] flex justify-between items-center">
+                    <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
+                      Capsule Launch Date
+                    </h6>
+                    <p className="font-light text-[1.4rem]">
+                      {capsule.original_launch &&
+                        formatDate(capsule.original_launch)}
+                    </p>
+                  </div>
+                </span>
+              </div>
 
-            <div className="flex flex-col gap-8">
-              <span className="text-[1.8rem]">
-                <div className="flex gap-4 max-sm:grid-cols-1 max-sm:text-center max-sm:justify-center">
-                  <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
-                    Detail 3
-                  </h6>
-                </div>
-              </span>
-            </div>
+              <div className="flex flex-col gap-8">
+                <span className="text-[1.8rem]">
+                  <div className="w-[calc(100%_-_50px)] flex justify-between items-center">
+                    <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
+                      Capsule Landings
+                    </h6>
+                    <p className="font-light text-left text-[1.4rem]">
+                      {capsule.landings}
+                    </p>
+                  </div>
+                </span>
+              </div>
 
-            <div className="flex flex-col gap-8">
-              <span className="text-[1.8rem]">
-                <div className="flex gap-4 max-sm:grid-cols-1 max-sm:text-center max-sm:justify-center">
-                  <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
-                    Detail 4
-                  </h6>
-                </div>
-              </span>
+              <div className="flex flex-col gap-8">
+                <span className="text-[1.8rem]">
+                  <div className="w-[calc(100%_-_50px)] flex justify-between items-center">
+                    <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
+                      Capsule Reuse
+                    </h6>
+                    <p className="font-light text-[1.4rem]">
+                      {capsule.reuse_count}
+                    </p>
+                  </div>
+                </span>
+              </div>
+
+              <div className="flex flex-col mt-8 gap-4">
+                <h5 className="font-bold text-[1.70rem] text-[#da2128]">
+                  Capsule Missions
+                </h5>
+                <span className="flex flex-col max-sm:grid-cols-1 max-sm:text-center max-sm:justify-center">
+                  {capsule.missions &&
+                    capsule.missions.map((mission, index) => (
+                      <Fragment key={"mission-" + index}>
+                        <div className="w-[calc(100%_-_50px)] flex justify-between items-center">
+                          <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
+                            Mission Name
+                          </h6>
+                          <p className={"font-light text-[1.4rem]"}>
+                            {mission.name}
+                          </p>
+                        </div>
+                        <div className="w-[calc(100%_-_50px)] flex justify-between items-center">
+                          <h6 className="font-bold text-[1.5rem] mb-[0.2rem]">
+                            Flight
+                          </h6>
+                          <p className={"font-light text-[1.4rem]"}>
+                            {mission.flight}
+                          </p>
+                        </div>
+                      </Fragment>
+                    ))}
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 sm:mt-[3.5rem]">
+              <h5 className="font-bold text-[1.8rem]">
+                <span className="text-black">{capsule.capsule_serial}</span>
+              </h5>
+              <h5 className="font-normal text-[1.4rem]">
+                <span className="text-black">{capsule.details}</span>
+              </h5>
+              {Capsule && (
+                <img className="w-full h-auto" src={Capsule} alt="car_img" />
+              )}
             </div>
           </div>
-          <div className="flex flex-col gap-12 sm:mt-[3.5rem]">
-            <h5 className="font-bold text-[1.8rem]">
-              <span className="text-black">C101</span>
-            </h5>
-            {Capsule && (
-              <img className="w-full h-auto" src={Capsule} alt="car_img" />
-            )}
-          </div>
-        </div>
+        )}
       </div>
     </>
   );
