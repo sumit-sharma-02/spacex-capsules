@@ -1,4 +1,4 @@
-<h1 align="center">Assignment</h1> 
+<h1 align="center">SpaceX API</h1> 
 
 <h2 align="center">A React application which shows you the filtered spaceX capsules data.</h2>
 
