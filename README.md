@@ -1,4 +1,4 @@
-<h1 align="center">SpaceX API</h1> 
+<h1 align="center">SpaceX Capsules</h1> 
 
 <h2 align="center">A React application which shows you the filtered spaceX capsules data.</h2>
 
@@ -13,7 +13,7 @@
     <br />&#10023;
     <a href="https://drive.google.com/file/d/1SMhEwV5q-NlJ7BxgU7cRLY5KaROw7dt8/view?usp=sharing">Demo Video</a>   &#10023;
     <a href="#Quick-Start">Quick Start</a>   &#10023;    
-    <a href="https://github.com/sumit-sharma-02/sumit-frontend-developer/issues">Report Bug</a>   &#10023;
+    <a href="https://github.com/sumit-sharma-02/spacex-capsules/issues">Report Bug</a>   &#10023;
     <a href="#Contact">Author</a>&#10023;
   </p>
   
@@ -50,7 +50,7 @@
 ## Quick Start
 
 ```shell
-$ git clone https://github.com/sumit-sharma-02/sumit-frontend-developer.git
+$ git clone https://github.com/sumit-sharma-02/spacex-capsules.git
 $ cd sumit-frontend-developer
 $ npm install
 $ npm start
