@@ -17,7 +17,7 @@
     <a href="#Contact">Author</a>&#10023;
   </p>
   
-  <h3 align="center"><a href="https://drive.google.com/file/d/1SMhEwV5q-NlJ7BxgU7cRLY5KaROw7dt8/view?usp=sharing"><strong>« Watch the demo here »</strong></a></h3>
+  <h3 align="center"><a href="https://spacex-capsules.vercel.app/"><strong>« Try the demo here »</strong></a></h3>
 
 ![assignment-poster](https://user-images.githubusercontent.com/52236473/226175420-8cfb1911-136e-4d43-b4f0-1c13d3398400.png)
 <br />
